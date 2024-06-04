@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, prefer_const_constructors
+// ignore_for_file: must_be_immutable, prefer_const_constructors, non_constant_identifier_names
 
 import 'dart:async';
 import 'dart:convert';
@@ -7,10 +7,21 @@ import 'package:flutter/material.dart';
 import 'package:http_auth/http_auth.dart';
 import 'package:rest_api/model/user.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   List<User> users = [];
+
+  void CheckBoxChanged(bool? value, int index) {
+    setState(() {
+      users[index].isEnabled = !users[index].isEnabled;
+    });
+  }
 
   // get users
   Future getUsers() async {
@@ -51,7 +62,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class BuilderForListview extends StatelessWidget {
+class BuilderForListview extends StatefulWidget {
   const BuilderForListview({
     super.key,
     required this.users,
@@ -60,11 +71,16 @@ class BuilderForListview extends StatelessWidget {
   final List<User> users;
 
   @override
+  State<BuilderForListview> createState() => _BuilderForListviewState();
+}
+
+class _BuilderForListviewState extends State<BuilderForListview> {
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: users.length,
+      itemCount: widget.users.length,
       itemBuilder: (context, index) {
-        bool isenabled = users[index].isEnabled;
+        bool isenabled = widget.users[index].isEnabled;
         return ListTile(
           leading: CircleAvatar(
             backgroundColor: isenabled ? Colors.green[700] : Colors.green[100],
@@ -75,20 +91,28 @@ class BuilderForListview extends StatelessWidget {
           ),
           textColor: isenabled ? Colors.black : Colors.grey,
           title: Text(
-            users[index].name,
+            widget.users[index].name,
             style: isenabled
                 ? const TextStyle(fontWeight: FontWeight.w500)
                 : const TextStyle(
                     fontWeight: FontWeight.w500, color: Colors.grey),
           ),
           subtitle: Text(
-            users[index].email,
+            widget.users[index].email,
             style: isenabled
                 ? const TextStyle(fontWeight: FontWeight.w500)
                 : const TextStyle(
                     fontWeight: FontWeight.w500, color: Colors.grey),
           ),
-          trailing: isenabled
+          trailing: Checkbox(
+            value: isenabled,
+            onChanged: (value) {
+              setState(() {
+                widget.users[index].isEnabled = !widget.users[index].isEnabled;
+              });
+            },
+          )
+          /*isenabled
               ? Icon(
                   Icons.check_circle,
                   color: Colors.green[700],
@@ -96,7 +120,8 @@ class BuilderForListview extends StatelessWidget {
               : const Icon(
                   Icons.check_circle_outline,
                   color: Colors.grey,
-                ),
+                )*/
+          ,
         );
       },
     );

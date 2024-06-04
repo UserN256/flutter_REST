@@ -2,7 +2,7 @@ class User{
   final int id;
   final String name;
   final String email;
-  final bool isEnabled;
+  bool isEnabled;
 
   User(
     {required this.id, 
