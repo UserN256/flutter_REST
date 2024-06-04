@@ -1,7 +1,13 @@
 class User{
-  final int id = 0;
-  final String name = "";
-  final String email = "";
+  final int id;
+  final String name;
+  final String email;
+  final bool isEnabled;
 
-  User({required id, required name, required email});
+  User(
+    {required this.id, 
+    required this.name, 
+    required this.email,
+    required this.isEnabled,
+    });
 }

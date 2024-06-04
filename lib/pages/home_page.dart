@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, prefer_const_constructors
 
 import 'dart:async';
 import 'dart:convert';
@@ -8,34 +8,97 @@ import 'package:http_auth/http_auth.dart';
 import 'package:rest_api/model/user.dart';
 
 class HomePage extends StatelessWidget {
-   HomePage({super.key});
+  HomePage({super.key});
 
-   List<User> users = [];
-
-
+  List<User> users = [];
 
   // get users
-  Future getUsers() async{
+  Future getUsers() async {
     var client = BasicAuthClient('admin@gmail.com', 'admin');
-    var response = await client.get(Uri.parse('https://javaops-demo.ru/topjava/rest/admin/users'));
+    var response = await client
+        .get(Uri.parse('https://javaops-demo.ru/topjava/rest/admin/users'));
     var jsondata = jsonDecode(response.body);
-    
-    for (var eachItem in jsondata){
+
+    for (var eachItem in jsondata) {
       final user = User(
-        id: eachItem["id"], 
-        name: eachItem["name"], 
+        id: eachItem["id"],
+        name: eachItem["name"],
         email: eachItem["email"],
+        isEnabled: eachItem["enabled"],
       );
       users.add(user);
     }
-
-    print(users.length);
-    
-
+    //print(users.length);
   }
+
   @override
   Widget build(BuildContext context) {
     getUsers();
-    return Scaffold();
+    return Scaffold(
+      body: FutureBuilder(
+        future: getUsers(),
+        builder: (context, snapshot) {
+          //is it done loading?
+          if (snapshot.connectionState == ConnectionState.done) {
+            return BuilderForListview(users: users);
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+          //still loading
+        },
+      ),
+    );
+  }
+}
+
+class BuilderForListview extends StatelessWidget {
+  const BuilderForListview({
+    super.key,
+    required this.users,
+  });
+
+  final List<User> users;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: users.length,
+      itemBuilder: (context, index) {
+        bool isenabled = users[index].isEnabled;
+        return ListTile(
+          leading: CircleAvatar(
+            backgroundColor: isenabled ? Colors.green[700] : Colors.green[100],
+            child: const Icon(
+              Icons.person_outline_outlined,
+              color: Colors.white,
+            ),
+          ),
+          textColor: isenabled ? Colors.black : Colors.grey,
+          title: Text(
+            users[index].name,
+            style: isenabled
+                ? const TextStyle(fontWeight: FontWeight.w500)
+                : const TextStyle(
+                    fontWeight: FontWeight.w500, color: Colors.grey),
+          ),
+          subtitle: Text(
+            users[index].email,
+            style: isenabled
+                ? const TextStyle(fontWeight: FontWeight.w500)
+                : const TextStyle(
+                    fontWeight: FontWeight.w500, color: Colors.grey),
+          ),
+          trailing: isenabled
+              ? Icon(
+                  Icons.check_circle,
+                  color: Colors.green[700],
+                )
+              : const Icon(
+                  Icons.check_circle_outline,
+                  color: Colors.grey,
+                ),
+        );
+      },
+    );
   }
 }
