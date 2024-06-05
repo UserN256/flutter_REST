@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     getUsers();
     return Scaffold(
+      backgroundColor: Color(0xffe9ecef),
       body: FutureBuilder(
         future: getUsers(),
         builder: (context, snapshot) {
@@ -53,9 +54,9 @@ class _HomePageState extends State<HomePage> {
           if (snapshot.connectionState == ConnectionState.done) {
             return BuilderForListview(users: users);
           } else {
+            //still loading
             return Center(child: CircularProgressIndicator());
           }
-          //still loading
         },
       ),
     );
@@ -81,47 +82,41 @@ class _BuilderForListviewState extends State<BuilderForListview> {
       itemCount: widget.users.length,
       itemBuilder: (context, index) {
         bool isenabled = widget.users[index].isEnabled;
-        return ListTile(
-          leading: CircleAvatar(
-            backgroundColor: isenabled ? Colors.green[700] : Colors.green[100],
-            child: const Icon(
-              Icons.person_outline_outlined,
-              color: Colors.white,
+        return Padding(
+          padding: const EdgeInsets.only(left: 8.0, top: 8, right:8),
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Color(0x3000d6c8)),
+            child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: isenabled ? Color(0xff007bff) : Color(0x50007bff),
+                child: const Icon(
+                  // show icon
+                  Icons.person_outline_outlined,
+                  color: Color(0xffe9ecef),
+                ),
+              ),
+              textColor: isenabled ? Colors.black : Colors.grey,
+              title: Text(
+                //show user name
+                widget.users[index].name,
+                style: const TextStyle(fontWeight: FontWeight.w500),
+              ),
+              subtitle: Text(
+                // show email
+                widget.users[index].email,
+                style: const TextStyle(fontWeight: FontWeight.w500),
+              ),
+              trailing: Checkbox(
+                value: isenabled,
+                // when checkbox is pressed
+                onChanged: (value) {
+                  setState(() {
+                    widget.users[index].isEnabled = !widget.users[index].isEnabled;
+                  });
+                },
+              ),
             ),
           ),
-          textColor: isenabled ? Colors.black : Colors.grey,
-          title: Text(
-            widget.users[index].name,
-            style: isenabled
-                ? const TextStyle(fontWeight: FontWeight.w500)
-                : const TextStyle(
-                    fontWeight: FontWeight.w500, color: Colors.grey),
-          ),
-          subtitle: Text(
-            widget.users[index].email,
-            style: isenabled
-                ? const TextStyle(fontWeight: FontWeight.w500)
-                : const TextStyle(
-                    fontWeight: FontWeight.w500, color: Colors.grey),
-          ),
-          trailing: Checkbox(
-            value: isenabled,
-            onChanged: (value) {
-              setState(() {
-                widget.users[index].isEnabled = !widget.users[index].isEnabled;
-              });
-            },
-          )
-          /*isenabled
-              ? Icon(
-                  Icons.check_circle,
-                  color: Colors.green[700],
-                )
-              : const Icon(
-                  Icons.check_circle_outline,
-                  color: Colors.grey,
-                )*/
-          ,
         );
       },
     );
