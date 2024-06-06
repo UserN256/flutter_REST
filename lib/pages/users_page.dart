@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:http_auth/http_auth.dart';
 import 'package:rest_api/model/user.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({super.key});
+class UsersPage extends StatefulWidget {
+  UsersPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<UsersPage> createState() => _UsersPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _UsersPageState extends State<UsersPage> {
   List<User> users = [];
 
   void CheckBoxChanged(bool? value, int index) {
@@ -46,6 +46,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     getUsers();
     return Scaffold(
+      // Background color of whole application
       backgroundColor: Color(0xffe9ecef),
       body: FutureBuilder(
         future: getUsers(),
@@ -69,6 +70,7 @@ class BuilderForListview extends StatefulWidget {
     required this.users,
   });
 
+  // Store all users here
   final List<User> users;
 
   @override
@@ -81,13 +83,19 @@ class _BuilderForListviewState extends State<BuilderForListview> {
     return ListView.builder(
       itemCount: widget.users.length,
       itemBuilder: (context, index) {
+        // Variable for enabled status
         bool isenabled = widget.users[index].isEnabled;
         return Padding(
           padding: const EdgeInsets.only(left: 8.0, top: 8, right:8),
           child: Container(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Color(0x3000d6c8)),
+            decoration: BoxDecoration(
+              // Rounding corners of each record's box
+              borderRadius: BorderRadius.circular(20), 
+              // Background color of box
+              color: Color(0x3000d6c8)),
             child: ListTile(
               leading: CircleAvatar(
+                // Color depend of enabled status
                 backgroundColor: isenabled ? Color(0xff007bff) : Color(0x50007bff),
                 child: const Icon(
                   // show icon

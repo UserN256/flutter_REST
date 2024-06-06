@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rest_api/pages/home_page.dart';
+import 'package:rest_api/pages/users_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,7 +16,7 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: UsersPage(),
     );
   }
 }
