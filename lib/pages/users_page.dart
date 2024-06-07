@@ -86,7 +86,7 @@ class _BuilderForListviewState extends State<BuilderForListview> {
         // Variable for enabled status
         bool isenabled = widget.users[index].isEnabled;
         return Padding(
-          padding: const EdgeInsets.only(left: 8.0, top: 8, right:8),
+          padding: const EdgeInsets.only(left: 2.0, top: 2.0, right:2.0),
           child: Container(
             decoration: BoxDecoration(
               // Rounding corners of each record's box
@@ -114,7 +114,9 @@ class _BuilderForListviewState extends State<BuilderForListview> {
                 widget.users[index].email,
                 style: const TextStyle(fontWeight: FontWeight.w500),
               ),
-              trailing: Checkbox(
+              trailing: 
+              //Icon(Icons.keyboard_arrow_right),
+              Checkbox(
                 value: isenabled,
                 // when checkbox is pressed
                 onChanged: (value) {
