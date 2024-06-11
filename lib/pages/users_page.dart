@@ -8,7 +8,7 @@ import 'package:http_auth/http_auth.dart';
 import 'package:rest_api/model/user.dart';
 
 class UsersPage extends StatefulWidget {
-  UsersPage({super.key});
+  const UsersPage({super.key});
 
   @override
   State<UsersPage> createState() => _UsersPageState();
@@ -46,6 +46,11 @@ class _UsersPageState extends State<UsersPage> {
   Widget build(BuildContext context) {
     getUsers();
     return Scaffold(
+      appBar: AppBar(
+          leading: IconButton(
+        icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.black),
+        onPressed: () => Navigator.of(context).pop(),
+      )),
       // Background color of whole application
       backgroundColor: Color(0xffe9ecef),
       body: FutureBuilder(
@@ -86,17 +91,18 @@ class _BuilderForListviewState extends State<BuilderForListview> {
         // Variable for enabled status
         bool isenabled = widget.users[index].isEnabled;
         return Padding(
-          padding: const EdgeInsets.only(left: 2.0, top: 2.0, right:2.0),
+          padding: const EdgeInsets.only(left: 2.0, top: 2.0, right: 2.0),
           child: Container(
             decoration: BoxDecoration(
-              // Rounding corners of each record's box
-              borderRadius: BorderRadius.circular(20), 
-              // Background color of box
-              color: Color(0x3000d6c8)),
+                // Rounding corners of each record's box
+                borderRadius: BorderRadius.circular(20),
+                // Background color of box
+                color: Color(0x3000d6c8)),
             child: ListTile(
               leading: CircleAvatar(
                 // Color depend of enabled status
-                backgroundColor: isenabled ? Color(0xff007bff) : Color(0x50007bff),
+                backgroundColor:
+                    isenabled ? Color(0xff007bff) : Color(0x50007bff),
                 child: const Icon(
                   // show icon
                   Icons.person_outline_outlined,
@@ -114,14 +120,15 @@ class _BuilderForListviewState extends State<BuilderForListview> {
                 widget.users[index].email,
                 style: const TextStyle(fontWeight: FontWeight.w500),
               ),
-              trailing: 
-              //Icon(Icons.keyboard_arrow_right),
-              Checkbox(
+              trailing:
+                  //Icon(Icons.keyboard_arrow_right),
+                  Checkbox(
                 value: isenabled,
                 // when checkbox is pressed
                 onChanged: (value) {
                   setState(() {
-                    widget.users[index].isEnabled = !widget.users[index].isEnabled;
+                    widget.users[index].isEnabled =
+                        !widget.users[index].isEnabled;
                   });
                 },
               ),

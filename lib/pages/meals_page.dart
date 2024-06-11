@@ -8,7 +8,7 @@ import 'package:http_auth/http_auth.dart';
 import 'package:rest_api/model/user.dart';
 
 class MealsPage extends StatefulWidget {
-  MealsPage({super.key});
+  const MealsPage({super.key});
 
   @override
   State<MealsPage> createState() => _MealsPageState();

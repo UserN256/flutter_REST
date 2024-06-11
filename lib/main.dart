@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:rest_api/pages/users_page.dart';
+import 'package:rest_api/pages/onboard_page.dart';
+//import 'package:rest_api/pages/users_page.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 
@@ -18,7 +21,8 @@ class MainApp extends StatelessWidget {
     FlutterNativeSplash.remove();
 
     return MaterialApp(
-      home: UsersPage(),
+      // first show on boarding screens
+      home: OnBoardingScreen(),
     );
   }
 }
