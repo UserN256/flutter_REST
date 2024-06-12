@@ -98,7 +98,7 @@ class _BuilderForListviewState extends State<BuilderForListview> {
                 // Rounding corners of each record's box
                 borderRadius: BorderRadius.circular(20),
                 // Background color of box
-                color: Color(0x3000d6c8)),
+                color: Color(0x1000d6c8)),
             child: ListTile(
               leading: CircleAvatar(
                 // Color depend of enabled status

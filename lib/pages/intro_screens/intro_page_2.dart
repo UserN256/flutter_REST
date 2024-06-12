@@ -13,7 +13,7 @@ class IntroPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
+        color: Color(0xffe9ecef),
         child: Center(
             child: SafeArea(
               child: Padding(
@@ -21,7 +21,7 @@ class IntroPage2 extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(height: 140,),
-                      Text('Стек технологий:',style: TextStyle(color: Colors.black, fontSize: textFontSize+5)),
+                      Text('Стек технологий:',style: TextStyle(color: Color(0xff4050b5), fontSize: textFontSize+5, fontWeight: FontWeight.bold)),
                       //Image(image: AssetImage('assets/javaopslogo.png')),
                       SizedBox(height: 10,),
                       RichText(
