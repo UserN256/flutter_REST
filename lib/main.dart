@@ -19,9 +19,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     FlutterNativeSplash.remove();
-
+    
     return MaterialApp(
-      // first show on boarding screens
+      // first show on boarding screens      
       home: OnBoardingScreen(),
     );
   }

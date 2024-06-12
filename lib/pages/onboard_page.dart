@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_final_fields
 
 import 'package:flutter/material.dart';
-import 'package:rest_api/pages/home_page.dart';
+//import 'package:rest_api/pages/home_page.dart';
 import 'package:rest_api/pages/intro_screens/intro_page_1.dart';
 import 'package:rest_api/pages/intro_screens/intro_page_2.dart';
-import 'package:rest_api/pages/intro_screens/intro_page_3.dart';
+//import 'package:rest_api/pages/intro_screens/intro_page_3.dart';
 import 'package:rest_api/pages/users_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -21,6 +21,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   // keep track if we are on the last page or not
   bool onLastPage = false;
+  final double textFontSize = 20;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -31,35 +33,36 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           controller: _controller,
           onPageChanged: (index) {
             setState(() {
-              onLastPage = (index == 2);
+              onLastPage = (index == 1);
             });
           },
           children: [
             IntroPage1(),
             IntroPage2(),
-            IntroPage3(),
           ],
         ),
         // dot indicators
         Container(
-            alignment: const Alignment(0, 0.75),
+            alignment: const Alignment(0, 0.90),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 // skip button
                 GestureDetector(
                     onTap: () {
-                      //_controller.jumpToPage(2);
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
                           return UsersPage();
                         },
                       ));
                     },
-                    child: Text('пропустить')),
+                    child: Text(
+                      'пропустить',
+                      style: TextStyle(color: Color(0xFF007bff), fontSize: textFontSize),
+                    )),
 
                 // dot indicator
-                SmoothPageIndicator(controller: _controller, count: 3),
+                SmoothPageIndicator(controller: _controller, count: 2),
                 // next or done button
                 onLastPage
                     ?
@@ -67,14 +70,17 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     GestureDetector(
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
-                            // when done with onboarding, go 1st users page 
+                            // when done with onboarding, go 1st users page
                             //TO DO: change to intro page with login
                             builder: (context) {
                               return UsersPage();
                             },
                           ));
                         },
-                        child: Text('понятно'))
+                        child: Text(
+                          'готово',
+                          style: TextStyle(color: Color(0xFF007bff), fontSize: textFontSize),
+                        ))
                     :
                     // if not last page, after : we need 'next'
                     GestureDetector(
@@ -84,7 +90,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             curve: Curves.easeIn,
                           );
                         },
-                        child: Text('дальше')),
+                        child: Text(
+                          'дальше',
+                          style: TextStyle(color: Color(0xFF007bff), fontSize: textFontSize),
+                        )),
               ],
             ))
       ],

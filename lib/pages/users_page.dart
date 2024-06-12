@@ -3,7 +3,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-//import 'package:http/http.dart' as http;
 import 'package:http_auth/http_auth.dart';
 import 'package:rest_api/model/user.dart';
 
@@ -48,9 +47,11 @@ class _UsersPageState extends State<UsersPage> {
     return Scaffold(
       appBar: AppBar(
           leading: IconButton(
-        icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.black),
-        onPressed: () => Navigator.of(context).pop(),
-      )),
+            icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+            ),
+            title: Center(child: Text("Пользователи", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),)),
+      ),
       // Background color of whole application
       backgroundColor: Color(0xffe9ecef),
       body: FutureBuilder(
