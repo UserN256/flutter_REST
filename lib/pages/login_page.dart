@@ -4,7 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:rest_api/components/my_button.dart';
 import 'package:rest_api/components/my_textfield.dart';
-import 'package:rest_api/components/square_tile.dart';
+//import 'package:rest_api/components/square_tile.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -14,27 +14,34 @@ class LoginPage extends StatelessWidget {
   final passwordController = TextEditingController();
 
   // sign user in method
-  void 
-  signUserIn() {}
+  void signUserIn() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.blue),
+            onPressed: () => Navigator.of(context).pop()            
+            ),
+            backgroundColor: Color(0xffe9ecef),
+      ),
+      backgroundColor: Color(0xffe9ecef),
       body: SafeArea(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
 
               // logo
               const Icon(
                 Icons.lock,
                 size: 100,
+                color: Color(0xff00d6c8)
               ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
 
               // welcome back, you've been missed!
               Text(
@@ -45,7 +52,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 25),
+              const SizedBox(height: 10),
 
               // username textfield
               MyTextField(
@@ -70,10 +77,10 @@ class LoginPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
+                  children: const [
                     Text(
                       'Забыли пароль?',
-                      style: TextStyle(color: Colors.grey[600]),
+                      style: TextStyle(color: Colors.blue),
                     ),
                   ],
                 ),
@@ -83,10 +90,12 @@ class LoginPage extends StatelessWidget {
 
               // sign in button
               MyButton(
+                buttonText: 'Войти',
                 onTap: signUserIn,
+                buttonColor: 0xff00d6c8
               ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
 
               // or continue with
               Padding(
@@ -116,9 +125,25 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
 
-              // google + apple sign in buttons
+              // sign as User button
+              MyButton(
+                buttonText: 'User',
+                onTap: signUserIn,
+                buttonColor: 0xff007bff
+              ),
+              
+              const SizedBox(height: 30),
+              
+              // sign as Admin button
+              MyButton(
+                buttonText: 'Admin',
+                onTap: signUserIn,
+                buttonColor: 0xff007bff 
+              ),
+
+              /*// google + apple sign in buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
@@ -130,7 +155,7 @@ class LoginPage extends StatelessWidget {
                   // apple button
                   SquareTile(imagePath: 'assets/apple.png')
                 ],
-              ),
+              ),*/
 
               const SizedBox(height: 50),
 
@@ -139,12 +164,12 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Not a member?',
+                    'Нет аккаунта?',
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   const SizedBox(width: 4),
                   const Text(
-                    'Register now',
+                    'Зарегистрируйтесь тут',
                     style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,

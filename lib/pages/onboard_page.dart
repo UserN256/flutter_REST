@@ -50,6 +50,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 GestureDetector(
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(
+                        // where we go after onboard page
                         builder: (context) {
                           return LoginPage();
                         },
@@ -57,7 +58,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     },
                     child: Text(
                       'пропустить',
-                      style: TextStyle(color: Color(0xff4050b5), fontSize: textFontSize, fontWeight: FontWeight.bold),//Color(0xff007bff)
+                      style: TextStyle(color: Colors.blue, fontSize: textFontSize, fontWeight: FontWeight.bold),//Color(0xff007bff)
                     )),
 
                 // dot indicator
@@ -66,10 +67,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 Padding(
                   padding: const EdgeInsets.all(32.0),
                   child: Container(     
-                    decoration: BoxDecoration(color: Color(0xff00d6c8),borderRadius: BorderRadius.all(Radius.circular(20))),                                   
+                    decoration: BoxDecoration(color: Color(0xff00d6c8),borderRadius: BorderRadius.all(Radius.circular(8))),                                   
                     child: onLastPage
                         ?
-                        // if we are on last page show 'done'
+                        // if we are on last page show 'done' - 'готово'
                         GestureDetector(
                             onTap: () {
                               Navigator.push(context, MaterialPageRoute(
@@ -83,7 +84,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Text(
-                                'готово',
+                                ' готово',
                                 style: TextStyle(color: Colors.white, fontSize: textFontSize, fontWeight: FontWeight.bold),
                               ),
                             ))
