@@ -3,7 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:rest_api/pages/intro_screens/intro_page_1.dart';
 import 'package:rest_api/pages/intro_screens/intro_page_2.dart';
-import 'package:rest_api/pages/users_page.dart';
+import 'package:rest_api/pages/login_page.dart';
+//import 'package:rest_api/pages/users_page.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -50,7 +51,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return UsersPage();
+                          return LoginPage();
                         },
                       ));
                     },
@@ -75,7 +76,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 // when done with onboarding, go 1st users page
                                 //TO DO: change to intro page with login
                                 builder: (context) {
-                                  return UsersPage();
+                                  return LoginPage();
                                 },
                               ));
                             },
