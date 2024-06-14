@@ -82,7 +82,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               ));
                             },
                             child: Padding(
-                              padding: const EdgeInsets.all(12.0),
+                              padding: const EdgeInsets.only(left: 11, top:8, right: 12, bottom: 12.0),
                               child: Text(
                                 ' готово',
                                 style: TextStyle(color: Colors.white, fontSize: textFontSize, fontWeight: FontWeight.bold),
@@ -98,7 +98,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               );
                             },
                             child: Padding(
-                              padding: const EdgeInsets.all(12.0),
+                              padding: const EdgeInsets.only(left: 11, top:8, right: 12, bottom: 12.0),
                               child: Text(
                                 'дальше',
                                 style: TextStyle(color: Colors.white, fontSize: textFontSize, fontWeight: FontWeight.bold),
